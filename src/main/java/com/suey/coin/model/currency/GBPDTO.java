@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -17,17 +16,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class GBPDTO {
 
-    private String status;
+    @JsonProperty("currency_name")
+    private String name;
 
-    @JsonProperty("updated_date")
-    private LocalDate updatedDate;
+    @JsonProperty("rate_for_amount")
+    private BigDecimal rateForAmount;
 
-    @JsonProperty("base_currency_code")
-    private String baseCurrencyCode;
-
-    @JsonProperty("base_currency_name")
-    private String baseCurrencyName;
-
-    private BigDecimal amount;
+    private BigDecimal rate;
 
 }

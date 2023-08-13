@@ -30,7 +30,6 @@ public class CurrencyDTO {
 
     private BigDecimal amount;
 
-    @JsonProperty("GBP")
-    private GBPDTO gbp;
+    private RateDTO rates;
 
 }

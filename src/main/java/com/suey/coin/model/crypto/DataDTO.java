@@ -6,17 +6,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CryptoDTO {
+public class DataDTO {
 
-    private StatsDTO stats;
+    private BigDecimal price;
 
-    private List<CoinDTO> coins;
+    private LocalDateTime timestamp;
 
 }

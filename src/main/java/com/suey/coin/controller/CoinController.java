@@ -6,6 +6,7 @@ import com.suey.coin.model.request.ResponseDTO;
 import com.suey.coin.service.ICoinService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ public class CoinController {
 
     @GetMapping("/convert")
     @Operation(description = "Converts a value from one currency to another.")
-    public ResponseDTO coinConverter(final RequestDTO request) throws BadRequestException {
+    public ResponseDTO coinConverter(@Valid final RequestDTO request) throws BadRequestException {
         return service.coinConverter(request);
     }
 
