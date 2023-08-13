@@ -7,17 +7,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DataDTO {
+public class CoinDataDTO {
 
     private BigDecimal price;
 
-    private LocalDateTime timestamp;
+    private Instant timestamp;
 
 }

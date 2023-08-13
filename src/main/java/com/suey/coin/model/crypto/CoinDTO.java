@@ -15,6 +15,6 @@ public class CoinDTO {
 
     private String status;
 
-    private DataDTO data;
+    private CoinDataDTO data;
 
 }

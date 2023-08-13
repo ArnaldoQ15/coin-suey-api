@@ -7,14 +7,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateDTO {
+public class CurrencyDataDTO {
 
-    @JsonProperty("GBP")
-    private GBPDTO gbp;
+    @JsonProperty("currency_name")
+    private String name;
+
+    @JsonProperty("rate_for_amount")
+    private BigDecimal rateForAmount;
+
+    private BigDecimal rate;
 
 }

@@ -17,14 +17,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ResponseDTO {
 
-    private EnumCoin from;
-
-    private BigDecimal amountRequest;
-
-    private EnumCoin to;
-
-    private BigDecimal amountResponse;
-
+    private ResponseDataDTO from;
+    private ResponseDataDTO to;
     private LocalDateTime dateTime;
+
+    @Getter
+    @Setter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ResponseDataDTO {
+
+        private EnumCoin coin;
+        private BigDecimal amount;
+
+    }
 
 }

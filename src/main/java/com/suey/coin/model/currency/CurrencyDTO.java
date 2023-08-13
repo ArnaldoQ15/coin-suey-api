@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -30,6 +31,6 @@ public class CurrencyDTO {
 
     private BigDecimal amount;
 
-    private RateDTO rates;
+    private Map<String, CurrencyDataDTO> rates;
 
 }
