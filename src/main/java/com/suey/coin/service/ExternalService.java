@@ -8,6 +8,9 @@ import com.suey.coin.model.currency.CurrencyDTO;
 import com.suey.coin.model.currency.CurrencyDataDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static java.util.Optional.ofNullable;
+import static org.springframework.http.HttpMethod.GET;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +32,9 @@ public class ExternalService implements IExternalService {
 
     @Value("${key.currency.geo.api}")
     private String keyGeoApi;
+
+    @Value("${key.coin.ranking}")
+    private String keyCoinRanking;
 
     public BigDecimal convertCurrency(final EnumCoin from, final BigDecimal amount, final EnumCoin to) throws BadRequestException {
         final RestTemplate restTemplate = new RestTemplate();
@@ -52,13 +59,18 @@ public class ExternalService implements IExternalService {
 
     public BigDecimal getCriptoPrice(final EnumCoin coin) throws BadRequestException {
         final RestTemplate restTemplate = new RestTemplate();
-        final Map<String, String> map = new HashMap<>();
-        map.put("from", coin.getCode());
+        final HttpHeaders headers = new HttpHeaders();
+        headers.add("x-access-token", keyCoinRanking);
+        final HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
         try {
-            final CoinDTO response = restTemplate.getForObject(URL_CHECK_CRYPTO, CoinDTO.class, map);
+            ResponseEntity<CoinDTO> response = restTemplate.exchange(
+                    URL_CHECK_CRYPTO.replace("{from}", coin.getCode()),
+                    GET,
+                    httpEntity,
+                    CoinDTO.class);
 
-            return ofNullable(response)
+            return ofNullable(response.getBody())
                     .map(CoinDTO::getData)
                     .map(CoinDataDTO::getPrice)
                     .orElseThrow(() -> new BadRequestException(ERROR_CURRENCY_NOT_AVAILABLE, coin.getCode()));

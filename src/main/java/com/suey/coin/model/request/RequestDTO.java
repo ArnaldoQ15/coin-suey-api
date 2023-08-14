@@ -1,7 +1,7 @@
 package com.suey.coin.model.request;
 
+import com.suey.coin.config.annotation.Needed;
 import com.suey.coin.enums.EnumCoin;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,13 +17,13 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class RequestDTO {
 
-    @NotNull
+    @Needed
     private EnumCoin from;
 
-    @NotNull
+    @Needed
     private EnumCoin to;
 
-    @NotNull
+    @Needed
     private BigDecimal amount;
 
 }
